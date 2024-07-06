@@ -40,11 +40,16 @@ def StudyMaterials():
                     <p style="font-family: Arial, sans-serif; font-size: 14px; text-align: center;">{card[i]}</p>
                 </div>
                 """, unsafe_allow_html=True)
-
+    
     # Initialize chat history
     if "study_materials_chat_history" not in st.session_state:
         st.session_state.study_materials_chat_history = []
-
+    st.sidebar.title(" 🌐 Study Materials  ")
+    st.sidebar.info("This is a chat interface to help you with your GRE preparation. You can ask questions and get answers from the assistant.")
+   
+    if st.sidebar.button("Clean Up Chat"):
+        st.session_state.study_materials_chat_history = []
+        
     # Display chat history
     for interaction in st.session_state.study_materials_chat_history:
         if interaction["inputs"]["chat_input"]:
@@ -89,6 +94,7 @@ def StudyMaterials():
 
         except urllib.error.HTTPError as error:
             st.error(f"The request failed with status code: {error.code}")
+            
 
 if __name__ == "__main__":
     StudyMaterials()
